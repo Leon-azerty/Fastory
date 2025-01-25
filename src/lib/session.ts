@@ -1,3 +1,4 @@
+import { DURATION } from '@/const'
 import prisma from '@lib/prisma'
 import { compareSync } from 'bcrypt-ts'
 import { SignJWT, jwtVerify } from 'jose'
@@ -11,7 +12,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('10 sec from now')
+    .setExpirationTime(`${DURATION} sec from now`)
     .sign(key)
 }
 
@@ -50,7 +51,7 @@ export async function login({
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
   }
 
-  const expires = new Date(Date.now() + 10 * 1000)
+  const expires = new Date(Date.now() + DURATION)
   const session = await encrypt({ user, expires })
 
   const cookiesStore = await cookies()
@@ -83,7 +84,7 @@ export async function updateSession(request: NextRequest) {
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session)
   if (!parsed) return Response.redirect(new URL('/login', request.url))
-  parsed.expires = new Date(Date.now() + 10 * 1000)
+  parsed.expires = new Date(Date.now() + DURATION)
   const res = NextResponse.next()
   res.cookies.set({
     name: 'session',
