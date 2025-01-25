@@ -12,20 +12,20 @@ const duration = 120
 const second = 1000
 
 export async function Login(prevState: any, formData: FormData) {
-  const { email, password } = loginSchema.parse({
-    email: formData.get('email'),
+  const { name, password } = loginSchema.parse({
+    name: formData.get('name'),
     password: formData.get('password'),
   })
 
-  if (!email || !password)
+  if (!name || !password)
     return {
-      message: 'Email and password are required',
+      message: 'name and password are required',
       type: 'error',
     } as FormResult
 
   const user = await prisma.user.findUnique({
     where: {
-      email: email,
+      name,
     },
   })
 

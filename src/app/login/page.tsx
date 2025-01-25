@@ -24,7 +24,7 @@ export default function Home() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
+      name: '',
       password: '',
     },
   })
@@ -48,7 +48,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle className="text-2xl">Login</CardTitle>
               <CardDescription>
-                Enter your email below to login to your account
+                Enter your name below to login to your account
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -56,16 +56,16 @@ export default function Home() {
                 <div className="grid gap-2">
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <FormLabel htmlFor="name">Name</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="m@example.com"
                             {...field}
-                            id="email"
-                            type="email"
+                            id="name"
+                            type="text"
                             required
                           />
                         </FormControl>
