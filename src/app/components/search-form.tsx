@@ -1,6 +1,6 @@
 'use client'
 
-import { FormResult, uploadSchema } from '@/app/common/type'
+import { FormResult, searchSchema } from '@/app/common/type'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
@@ -24,11 +24,11 @@ const initialState: FormResult = {
   message: '',
 }
 
-export default function UploadForm() {
-  const form = useForm<z.infer<typeof uploadSchema>>({
-    resolver: zodResolver(uploadSchema),
+export default function SearchForm() {
+  const form = useForm<z.infer<typeof searchSchema>>({
+    resolver: zodResolver(searchSchema),
     defaultValues: {
-      url: '',
+      name: '',
     },
   })
 
@@ -48,15 +48,15 @@ export default function UploadForm() {
         <form action={formAction} className="space-y-8">
           <FormField
             control={form.control}
-            name="url"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Url</FormLabel>
+                <FormLabel>name</FormLabel>
                 <FormControl>
-                  <Input placeholder="google.com" {...field} />
+                  <Input placeholder="anakin" {...field} />
                 </FormControl>
                 <FormDescription>
-                  This is the url of the website.
+                  This is the name of the character/movie.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

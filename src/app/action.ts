@@ -2,12 +2,12 @@
 
 import { getUser } from '@/lib/session'
 import { revalidatePath } from 'next/cache'
-import { FormResult, uploadSchema } from './common/type'
+import { FormResult, searchSchema } from './common/type'
 
 export async function NameTmp(prevState: any, formdata: FormData) {
   try {
-    const { url } = uploadSchema.parse({
-      url: formdata.get('url'),
+    const { name } = searchSchema.parse({
+      name: formdata.get('name'),
     })
 
     const user = await getUser()
@@ -15,8 +15,8 @@ export async function NameTmp(prevState: any, formdata: FormData) {
       return { message: 'error', type: 'error' } as FormResult
     }
 
-    if (!url) {
-      return { message: 'URL is required', type: 'error' } as FormResult
+    if (!name) {
+      return { message: 'name is required', type: 'error' } as FormResult
     }
 
     revalidatePath('/')

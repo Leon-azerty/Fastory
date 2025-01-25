@@ -5,8 +5,8 @@ export const loginSchema = z.object({
   password: z.string().min(2).max(50),
 })
 
-export const uploadSchema = z.object({
-  url: z.string().min(2).max(50),
+export const searchSchema = z.object({
+  name: z.string().min(2).max(50),
 })
 
 export type FormResult = {
