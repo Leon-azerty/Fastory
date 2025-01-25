@@ -7,12 +7,12 @@ import { FormResult, loginSchema } from '../common/type'
 
 export default async function signUp(prevState: any, formData: FormData) {
   try {
-    const { email, password } = loginSchema.parse({
-      email: formData.get('email'),
+    const { name, password } = loginSchema.parse({
+      name: formData.get('name'),
       password: formData.get('password'),
     })
 
-    if (!email || !password) {
+    if (!name || !password) {
       return {
         message: 'Please fill all fields',
         type: 'error',
@@ -24,7 +24,7 @@ export default async function signUp(prevState: any, formData: FormData) {
 
     const user = await prisma.user.create({
       data: {
-        email,
+        name,
         password: hash,
       },
     })
@@ -36,6 +36,7 @@ export default async function signUp(prevState: any, formData: FormData) {
       } as FormResult
     }
   } catch (error) {
+    console.error('Error: ', error)
     return {
       message: 'Internal Server Error : ' + error,
       type: 'error',
