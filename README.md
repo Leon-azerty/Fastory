@@ -3,14 +3,21 @@
 `pnpm prisma generate`
  + créer un .env 
  + set les var env dans le fichier
-# Title
-
-
-## Description
-
-~~bla bla bla~~
+# Fastory, Technical test
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## What I Did
+
+- I began to setup the repo, update dependencies etc.
+- I have updated the login form to handle the name and password method to auth user.
+
+## To Do
+
+- update login form to handle name/password method
+- abstract the communication with star wars API
+- create a page for each item in db
+
 
 ## Getting Started
 
