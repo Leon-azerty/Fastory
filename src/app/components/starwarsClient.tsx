@@ -14,11 +14,15 @@ import Filter from './filter'
 
 export default function StarwarsClient({ items }: { items: ItemProps }) {
   const [selected, setSelected] = useState('people')
+  const [searchResult, setSearchResult] = useState<any[]>([])
 
   return (
     <section className="flex">
-      <Filter setSelected={setSelected} />
-
+      <Filter
+        selected={selected}
+        setSelected={setSelected}
+        setSearchResult={setSearchResult}
+      />
       <Table>
         <TableHeader>
           <TableRow>
@@ -26,13 +30,21 @@ export default function StarwarsClient({ items }: { items: ItemProps }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {items[selected].map((item, index) => (
-            <TableRow key={index}>
-              <TableCell className="font-medium">
-                {item.name ? item.name : item.title}
-              </TableCell>
-            </TableRow>
-          ))}
+          {searchResult.length > 0
+            ? searchResult.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">
+                    {item.name ? item.name : item.title}
+                  </TableCell>
+                </TableRow>
+              ))
+            : items[selected].map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium">
+                    {item.name ? item.name : item.title}
+                  </TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
     </section>

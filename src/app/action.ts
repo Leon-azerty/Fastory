@@ -1,34 +1,19 @@
 'use server'
 
-import { getUser } from '@/lib/session'
-import { revalidatePath } from 'next/cache'
-import { FormResult, searchSchema } from './common/type'
+import { fetchItems } from '@/lib/starwarsApi'
+import { LeafType } from '@/lib/type'
 
-export async function NameTmp(prevState: any, formdata: FormData) {
+export async function search(selected: string, name: string) {
   try {
-    const { name } = searchSchema.parse({
-      name: formdata.get('name'),
-    })
-
-    const user = await getUser()
-    if (user === null) {
-      return { message: 'error', type: 'error' } as FormResult
+    if (!name || !selected) {
+      return { message: 'please re-try later', type: 'error' }
     }
 
-    if (!name) {
-      return { message: 'name is required', type: 'error' } as FormResult
-    }
-
-    revalidatePath('/')
-
-    return {
-      message: 'Action successfull',
-      type: 'success',
-    } as FormResult
+    return await fetchItems(selected as LeafType, name)
   } catch (error) {
     return {
-      message: 'Failed to capture screenshot' + error,
+      message: 'Failed to search' + error,
       type: 'error',
-    } as FormResult
+    }
   }
 }

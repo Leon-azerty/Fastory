@@ -12,9 +12,13 @@ import { RadioGroup, RadioGroupItem } from '@/ui/radio-group'
 import SearchForm from './search-form'
 
 export default function Filter({
+  selected,
   setSelected,
+  setSearchResult,
 }: {
+  selected: string
   setSelected: (value: string) => void
+  setSearchResult: (value: any) => void
 }) {
   const handleOnValueChange = (value: string) => {
     console.log('value', value)
@@ -27,7 +31,7 @@ export default function Filter({
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <SearchForm />
+        <SearchForm selected={selected} setSearchResult={setSearchResult} />
         <RadioGroup defaultValue="people" onValueChange={handleOnValueChange}>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="people" id="people" />
