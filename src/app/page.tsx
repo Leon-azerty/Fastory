@@ -3,13 +3,23 @@ import { ItemProps } from '@/lib/type'
 import StarwarsClient from './components/starwarsClient'
 
 export default async function Home() {
+  const [people, planets, films, species, vehicles, starships] =
+    await Promise.all([
+      fetchItems('people'),
+      fetchItems('planets'),
+      fetchItems('films'),
+      fetchItems('species'),
+      fetchItems('vehicles'),
+      fetchItems('starships'),
+    ])
+
   const items: ItemProps = {
-    people: await fetchItems('people'),
-    planets: await fetchItems('planets'),
-    films: await fetchItems('films'),
-    species: await fetchItems('species'),
-    vehicles: await fetchItems('vehicles'),
-    starships: await fetchItems('starships'),
+    people,
+    planets,
+    films,
+    species,
+    vehicles,
+    starships,
   }
 
   return (
