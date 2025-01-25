@@ -9,11 +9,12 @@ export async function search(selected: string, name: string) {
       return { message: 'please re-try later', type: 'error' }
     }
 
-    return await fetchItems(selected as LeafType, name)
+    const items = await fetchItems(selected as LeafType, name)
+    return { items, error: false }
   } catch (error) {
     return {
       message: 'Failed to search' + error,
-      type: 'error',
+      error: true,
     }
   }
 }
