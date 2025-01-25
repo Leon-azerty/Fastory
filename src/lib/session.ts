@@ -16,24 +16,29 @@ export async function encrypt(payload: any) {
 }
 
 export async function decrypt(input: string): Promise<any> {
-  const { payload } = await jwtVerify(input, key, {
-    algorithms: ['HS256'],
-  })
-  return payload
+  try {
+    const { payload } = await jwtVerify(input, key, {
+      algorithms: ['HS256'],
+    })
+    return payload
+  } catch (error) {
+    console.log('error', error)
+    return null
+  }
 }
 
 // --------------------------------------------------
 
 export async function login({
-  email,
+  name,
   password,
 }: {
-  email: string
+  name: string
   password: string
 }) {
   const user = await prisma.user.findUnique({
     where: {
-      email,
+      name,
     },
   })
 
@@ -77,6 +82,7 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session)
+  if (!parsed) return Response.redirect(new URL('/login', request.url))
   parsed.expires = new Date(Date.now() + 10 * 1000)
   const res = NextResponse.next()
   res.cookies.set({
