@@ -1,6 +1,14 @@
 'use client'
 
 import { ItemProps } from '@/lib/type'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/ui/table'
 import { useState } from 'react'
 import Filter from './filter'
 
@@ -10,15 +18,23 @@ export default function StarwarsClient({ items }: { items: ItemProps }) {
   return (
     <section className="flex">
       <Filter setSelected={setSelected} />
-      <div className="grid grid-cols-3 gap-4">
-        {items[selected].map((item, index) => (
-          <div key={index} className="p-4">
-            <h2 className="text-lg font-bold">
-              {item.name ? item.name : item.title}
-            </h2>
-          </div>
-        ))}
-      </div>
+
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {items[selected].map((item, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">
+                {item.name ? item.name : item.title}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </section>
   )
 }
