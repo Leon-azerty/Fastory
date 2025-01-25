@@ -1,14 +1,10 @@
+import { LeafType, LeafTypeMap } from './type'
+
 const BASE_URL = 'https://swapi.dev/api'
 
-type LeafType =
-  | 'people'
-  | 'planets'
-  | 'films'
-  | 'species'
-  | 'vehicles'
-  | 'starships'
-
-export async function fetchItems(leaf: LeafType) {
+export async function fetchItems<T extends LeafType>(
+  leaf: T,
+): Promise<LeafTypeMap[T]> {
   const res = await fetch(`${BASE_URL}/${leaf}/`)
 
   if (!res.ok) {
@@ -17,5 +13,5 @@ export async function fetchItems(leaf: LeafType) {
 
   const data = await res.json()
   console.log('data', data)
-  return data
+  return data.results
 }
