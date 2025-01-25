@@ -12,11 +12,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - I began to setup the repo, update dependencies etc.
 - I have updated the login form to handle the name and password method to auth user.
 - update login form to handle name/password method
+- abstract the communication with star wars API
 
 ## To Do
 
-- abstract the communication with star wars API
+- add table to represent data displayed
+- add pagination to navigate through different pages
+- implement search feature
 - create a page for each item in db
+- add debounce to search feature
 
 ## Bonus 
 
