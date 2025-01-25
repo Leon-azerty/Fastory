@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/app/common/theme-provider'
 import { Toaster } from '@ui/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ModeToggle } from './common/modeToggle'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -31,6 +32,9 @@ export default function RootLayout({
         >
           {children}
           <Toaster richColors />
+          <div className="fixed bottom-4 right-4">
+            <ModeToggle />
+          </div>
         </ThemeProvider>
       </body>
     </html>
