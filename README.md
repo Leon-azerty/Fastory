@@ -11,13 +11,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - I began to setup the repo, update dependencies etc.
 - I have updated the login form to handle the name and password method to auth user.
+- update login form to handle name/password method
 
 ## To Do
 
-- update login form to handle name/password method
 - abstract the communication with star wars API
 - create a page for each item in db
 
+## Bonus 
+
+- reset-password page with a question to change password 
 
 ## Getting Started
 
