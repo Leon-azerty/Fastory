@@ -6,15 +6,17 @@ import { LeafType } from '@/lib/type'
 export async function search(selected: string, name: string) {
   try {
     if (!name || !selected) {
-      return { message: 'please re-try later', type: 'error' }
+      return null
     }
 
-    const items = await fetchItems(selected as LeafType, name)
-    return { items, error: false }
-  } catch (error) {
+    const items = await fetchItems({ leaf: selected as LeafType, search: name })
     return {
-      message: 'Failed to search' + error,
-      error: true,
+      next: items.next,
+      count: items.count,
+      previous: items.previous,
+      results: items.results,
     }
+  } catch (error) {
+    return null
   }
 }

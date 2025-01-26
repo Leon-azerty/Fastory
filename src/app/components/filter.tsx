@@ -1,5 +1,7 @@
 'use client'
 
+import { fetchItems } from '@/lib/starwarsApi'
+import { LeafType } from '@/lib/type'
 import {
   Card,
   CardContent,
@@ -15,15 +17,20 @@ export default function Filter({
   selected,
   setSelected,
   setSearchResult,
+  setItems,
 }: {
   selected: string
   setSelected: (value: string) => void
   setSearchResult: (value: any) => void
+  setItems: (value: any) => void
 }) {
-  const handleOnValueChange = (value: string) => {
+  const handleOnValueChange = async (value: string) => {
     console.log('value', value)
     setSelected(value)
+    const items = await fetchItems({ leaf: value as LeafType })
+    setItems(items)
   }
+
   return (
     <Card className="w-[300px]">
       <CardHeader>

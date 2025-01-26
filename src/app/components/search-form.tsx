@@ -19,15 +19,16 @@ export default function SearchForm({
   const onSubmit = async () => {
     const res = await search(selected, name)
 
-    if (res.error) {
-      toast.error(res.message)
-      return console.error(res.message)
+    if (!res) {
+      toast.error('error during search, please try again later')
+      return console.error('error during search, please try again later')
     }
 
-    if (res.items && res.items.length === 0) {
+    // @ts-ignore
+    if (res.results && res.results.length === 0) {
       toast.info('No result found')
     }
-    setSearchResult(res.items)
+    setSearchResult(res.results)
   }
   return (
     <div className="w-40 space-y-2">
