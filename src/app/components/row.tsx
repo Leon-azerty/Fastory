@@ -47,7 +47,22 @@ export default function Row({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{item.name}</DialogTitle>
-            <DialogDescription>data to show about item</DialogDescription>
+            <DialogDescription>
+              {Object.keys(item).map((key) =>
+                typeof item[key] == 'string' ? (
+                  <p>
+                    {key} : {item[key]}
+                  </p>
+                ) : (
+                  <p>
+                    {key} :{' '}
+                    {item[key].map((i: any) => (
+                      <p>{i}</p>
+                    ))}
+                  </p>
+                ),
+              )}
+            </DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
