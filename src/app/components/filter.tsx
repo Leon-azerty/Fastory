@@ -30,7 +30,7 @@ export default function Filter({
   }
 
   return (
-    <Card className="w-[300px]">
+    <Card className="w-[200px]">
       <CardHeader>
         <CardTitle></CardTitle>
         <CardDescription></CardDescription>

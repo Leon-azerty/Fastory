@@ -17,6 +17,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - implement search feature
 - add pagination to navigate through different pages
 - display more data in tables
+- hide text in table when it's too long
 
 ## To Do
 
