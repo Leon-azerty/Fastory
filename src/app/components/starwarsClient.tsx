@@ -1,6 +1,5 @@
 'use client'
 
-import { fetchItems } from '@/lib/starwarsApi'
 import {
   FilmsType,
   LeafType,
@@ -10,25 +9,12 @@ import {
   StarshipsType,
   VehiclesType,
 } from '@/lib/type'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/ui/pagination'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/ui/table'
+import { Table, TableBody, TableCaption } from '@/ui/table'
 import { useState } from 'react'
 import Filter from './filter'
+import PaginationTable from './paginationTable'
+import Row from './row'
+import RowName from './rowName'
 
 export default function StarwarsClient({
   ServerItems,
@@ -42,7 +28,6 @@ export default function StarwarsClient({
     | StarshipsType
 }) {
   const [selected, setSelected] = useState('people')
-  const [searchResult, setSearchResult] = useState<any[]>([])
   const [items, setItems] = useState<
     | PeopleType
     | PlanetsType
@@ -52,86 +37,26 @@ export default function StarwarsClient({
     | StarshipsType
   >(ServerItems)
 
-  const loadPage = async (url: string) => {
-    console.log('loadPage', url)
-    const urlParams = new URLSearchParams(url.split('?')[1])
-    const page = urlParams.get('page') || '1'
-    const tmp = await fetchItems({
-      leaf: selected as LeafType,
-      page: page,
-    })
-    setItems(tmp)
-  }
-
   return (
     <section className="flex">
       <Filter
         selected={selected}
         setSelected={setSelected}
-        setSearchResult={setSearchResult}
         setItems={setItems}
       />
       <div className="flex flex-col">
-        <p>Total : {items.count}</p>
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-            </TableRow>
-          </TableHeader>
+          <RowName results={items.results} />
           <TableBody>
-            {searchResult.length > 0
-              ? searchResult.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">
-                      {item.name ? item.name : item.title}
-                    </TableCell>
-                  </TableRow>
-                ))
-              : // @ts-ignore
-                items.results.map((item: any, index: number) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">
-                      {item.name ? item.name : item.title}
-                    </TableCell>
-                  </TableRow>
-                ))}
+            <Row items={items} />
           </TableBody>
+          <TableCaption>Total : {items.count}</TableCaption>
         </Table>
-        <Pagination>
-          <PaginationContent>
-            {items.previous ? (
-              <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => {
-                    loadPage(items.previous)
-                  }}
-                />
-              </PaginationItem>
-            ) : null}
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  console.log('load first page')
-                }}
-              >
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            {items.next ? (
-              <PaginationItem>
-                <PaginationNext
-                  onClick={() => {
-                    loadPage(items.next)
-                  }}
-                />
-              </PaginationItem>
-            ) : null}
-          </PaginationContent>
-        </Pagination>
+        <PaginationTable
+          items={items}
+          setItems={setItems}
+          selected={selected as LeafType}
+        />
       </div>
     </section>
   )

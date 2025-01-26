@@ -27,7 +27,7 @@ export type PeopleType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export type PlanetsType = {
@@ -49,7 +49,7 @@ export type PlanetsType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export type FilmsType = {
@@ -71,7 +71,7 @@ export type FilmsType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export type SpeciesType = {
@@ -94,7 +94,7 @@ export type SpeciesType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export type VehiclesType = {
@@ -118,7 +118,7 @@ export type VehiclesType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export type StarshipsType = {
@@ -144,7 +144,7 @@ export type StarshipsType = {
     created: string
     edited: string
     url: string
-  }
+  }[]
 }
 
 export interface ItemProps {

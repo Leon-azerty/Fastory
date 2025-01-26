@@ -16,12 +16,10 @@ import SearchForm from './search-form'
 export default function Filter({
   selected,
   setSelected,
-  setSearchResult,
   setItems,
 }: {
   selected: string
   setSelected: (value: string) => void
-  setSearchResult: (value: any) => void
   setItems: (value: any) => void
 }) {
   const handleOnValueChange = async (value: string) => {
@@ -38,7 +36,7 @@ export default function Filter({
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <SearchForm selected={selected} setSearchResult={setSearchResult} />
+        <SearchForm selected={selected} setSearchResult={setItems} />
         <RadioGroup defaultValue="people" onValueChange={handleOnValueChange}>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="people" id="people" />
