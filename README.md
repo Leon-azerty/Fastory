@@ -18,10 +18,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - add pagination to navigate through different pages
 - display more data in tables
 - hide text in table when it's too long
+- create a page for each item in db
 
 ## To Do
 
-- create a page for each item in db
 - add debounce to search feature
 
 ## Bonus 

@@ -13,8 +13,8 @@ import { Table, TableBody, TableCaption } from '@/ui/table'
 import { useState } from 'react'
 import Filter from './filter'
 import PaginationTable from './paginationTable'
-import Row from './row'
 import RowName from './rowName'
+import Row from './rowTable.tsx/row'
 
 export default function StarwarsClient({
   ServerItems,
